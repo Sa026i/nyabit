@@ -73,3 +73,6 @@ MVPリリース時
 - デプロイ先：Render
 - 環境構築：Docker
 - 使用予定のGem：Devise / Simple_calender
+
+## 画面遷移図
+[→Figma で画面遷移図を表示](https://www.figma.com/design/7tCuDPFdnj5qVoCroDDo5u/Nyabit?node-id=0-1&p=f&t=k3mkVxmPUzmXH8W8-0)
