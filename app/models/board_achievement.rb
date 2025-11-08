@@ -1,0 +1,2 @@
+class BoardAchievement < ApplicationRecord
+end
