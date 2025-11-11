@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class Users::ConfirmationsController < Devise::ConfirmationsController
+  #ユーザーがメールアドレスを認証するためのコントローラー
   # GET /resource/confirmation/new
   # def new
   #   super
