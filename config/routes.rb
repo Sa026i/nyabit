@@ -11,7 +11,11 @@ Rails.application.routes.draw do
   root "tops#top"
   get "home/top"
 
-  get "up" => "rails/health#show", as: :rails_health_check
+  resources :users, only: %i[show edit update]
+  resources :habits, only: %i[index new create edit update destroy]
+
+
+  get "up" => "rails/health#show", as: :rails_health_check #ヘルスチェック
 
   # Render dynamic PWA files from app/views/pwa/*
   get "service-worker" => "rails/pwa#service_worker", as: :pwa_service_worker
