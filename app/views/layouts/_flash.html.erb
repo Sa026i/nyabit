@@ -1,0 +1,6 @@
+<% flash.each do |key, message| %>
+    <% next if message.blank? %>
+    <div class="alert alert-info mb-2">
+        <%= message %>
+    </div>
+<% end %>
