@@ -1,0 +1,14 @@
+<% if flash[:alert].present? %>
+    <div class="alert alert-error mb-2">
+        <span><%= flash[:alert] %></span>
+        <% if habit.errors.any? %>
+            <ul class="mt-2 text-sm">
+                <% habit.errors.full_messages.each do |message| %>
+                    <li><%= message %></li>
+            <% end %>
+            </ul>
+        <% end %>
+    </div>
+<% else %>
+    <div></div>
+<% end %>

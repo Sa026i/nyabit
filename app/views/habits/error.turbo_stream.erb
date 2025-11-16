@@ -1,0 +1,6 @@
+<%= turbo_stream.replace "habit_form",
+    partial: "habits/form",
+    locals: { habit: @habit, partners: @partners } %>
+
+<%= turbo_stream.replace "habit_modal_flash",
+    partial: "habits/modal_flash",locals: { habit: @habit, flash: flash } %>

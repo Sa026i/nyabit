@@ -24,9 +24,9 @@
   </header>
 
   <body>
-  <% flash.each do |type, message| %>
-    <div class="flash <%= type %>"><%= message %></div>
-  <% end %>
+  <div id="flash">
+    <%= render "layouts/flash" %>
+  </div>
     <%= yield %>
   </body>
 

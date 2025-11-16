@@ -1,0 +1,8 @@
+<!-- 登録内容をindexに反映 -->
+<%= turbo_stream.prepend "habits", partial: "habits/habit", locals: { habit: @habit } %>
+
+<!-- 登録後、フォームを空の状態に置き換え -->
+<%= turbo_stream.replace "habit_form", partial: "habits/form", locals: { habit: Habit.new, partners: @partners } %>
+
+<!-- 登録後、フラッシュメッセージを表示 -->
+<%= turbo_stream.replace "flash",partial: "layouts/flash", locals: { flash: { notice: flash[:notice] } } %>
