@@ -1,0 +1,5 @@
+<!-- 登録内容をindexに反映 -->
+<%= turbo_stream.replace "habits", partial: "habits/habit", locals: { habit: @habit } %>
+
+<!-- 登録後、フラッシュメッセージを表示 -->
+<%= turbo_stream.replace "flash",partial: "layouts/flash", locals: { flash: { notice: flash[:notice] } } %>
