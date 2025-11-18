@@ -1,3 +1,16 @@
 <div id="<%= dom_id(habit) %>">
-  <p><%= habit.title %>（<%= habit.partner.name %>）</p>
+    <p><%= habit.title %>（<%= habit.partner.name %>）</p>
+    <button class="btn btn-primary" onclick="my_modal_edit_<%= habit.id %>.showModal()">編集</button>
+    <dialog id="my_modal_edit_<%= habit.id %>" class="modal" data-controller="modal">
+    <div class="modal-box">
+        <form method="dialog">
+        <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+        </form>
+    <fieldset class="fieldset bg-base-200 border-base-300 rounded-box w-xs border p-4">
+    <legend class="fieldset-legend">Page details</legend>
+
+    <%= render 'edit', habit: habit, partners: @partners %>
+    </div>
+    </dialog>
+    <%= link_to '削除', habit_path(habit), data: { turbo_method: :delete, turbo_confirm: "投稿を削除します。よろしいですか？"}, class: "btn btn-primary" %>
 </div>
