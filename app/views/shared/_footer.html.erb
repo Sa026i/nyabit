@@ -1,21 +1,30 @@
 <div class="dock">
-<button>
-    <i class="fa-solid fa-paw"></i>
-    <span class="dock-label">習慣</span>
-</button>
 
-<button class="dock-active">
-    <i class="fa-solid fa-calendar-days"></i>
-    <span class="dock-label">カレンダー</span>
-</button>
+<%= link_to home_top_path, class: "dock-item flex flex-col items-center #{current_page?(home_top_path) ? 'text-blue-300' : 'text-base-content'}" do %>
+    <i class="fa-solid fa-house text-2xl"></i>
+    <span class="dock-label text-sm">ホーム</span>
+<% end %>
 
-<button>
-    <i class="fa-solid fa-book-open-reader"></i>
-    <span class="dock-label">掲示板</span>
-</button>
+<%= link_to habits_path, class: "dock-item flex flex-col items-center #{current_page?(habits_path) ? 'text-blue-300' : 'text-base-content' }" do %>
+    <i class="fa-solid fa-paw text-2xl"></i>
+    <span class="dock-label text-sm">習慣</span>
+<% end %>
 
-<button>
-    <i class="fa-solid fa-user"></i>
-    <span class="dock-label">ユーザー</span>
-</button>
+<!-- #link_to calendar_path -->
+<%= link_to "", class: "dock-item flex flex-col items-center" do %>
+    <i class="fa-solid fa-calendar text-xl"></i>
+    <span class="dock-label text-xs">カレンダー</span>
+<% end %>
+
+<!-- link_to boards_path -->
+<%= link_to "", class: "dock-item flex flex-col items-center" do %>
+    <i class="fa-solid fa-book text-xl"></i>
+    <span class="dock-label text-xs">掲示板</span>
+<% end %>
+
+<!-- link_to user_path(current_user) -->
+<%= link_to "", class: "dock-item flex flex-col items-center" do %>
+    <i class="fa-solid fa-user text-xl"></i>
+    <span class="dock-label text-xs">ユーザー</span>
+<% end %>
 </div>

@@ -1,7 +1,7 @@
 <div id="<%= dom_id(habit) %>">
-    <p><%= image_tag(asset_exist?("partners/#{habit.partner.code}.webp") ?
-            "partners/#{habit.partner.code}.webp" :
-            "partners/no_image_icon.webp",
+    <p><%= image_tag(asset_exist?("#{habit.partner.code}.webp") ?
+            "#{habit.partner.code}.webp" :
+            "no_image_icon.webp",
             class: "w-[140px] h-[140px]") %><%= habit.title %></p>
     <button class="btn btn-primary" onclick="my_modal_edit_<%= habit.id %>.showModal()">編集</button>
     <dialog id="my_modal_edit_<%= habit.id %>" class="modal" data-controller="modal">
