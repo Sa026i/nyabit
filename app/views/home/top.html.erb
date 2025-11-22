@@ -3,7 +3,6 @@
     style="background-image: url(<%= asset_path('pc_back_lunch.webp') %>);">
 
 <div class= "flex justify-center items-end h-screen">
-<% completed = @completed_habit_ids.include?(habit.id) %>
     <% @habits.each do |h| %>
     <% slot_class =
         case h.position
