@@ -16,9 +16,9 @@
         <%= f.radio_button :partner_id, partner.id, class: "hidden peer" %>
         <div class="p-4 border rounded peer-checked:border-blue-500 w-[150px] text-center">
         <div class="w-32 h-32 mx-auto flex items-center justify-center"> <!-- アイコンを正方形 -->
-        <p><%= image_tag(asset_exist?("partners/#{partner.code}.webp") ?
-            "partners/#{partner.code}.webp" :
-            "partners/no_image_icon.webp",
+        <p><%= image_tag(asset_exist?("#{partner.code}.webp") ?
+            "#{partner.code}.webp" :
+            "no_image_icon.webp",
             class: "max-w-full max-h-full object-contain object-center") %></p>
         </div>
         <p><%= partner.name %></p>

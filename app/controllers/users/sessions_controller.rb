@@ -27,6 +27,11 @@ class Users::SessionsController < Devise::SessionsController
   # end
 
   #ログアウト後のリダイレクト先
+
+  def after_sign_in_path_for(resource_or_scope)
+    home_top_path
+  end
+
   def after_sign_out_path_for(resource_or_scope)
     root_path
   end
