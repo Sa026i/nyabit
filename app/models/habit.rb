@@ -6,6 +6,7 @@ class Habit < ApplicationRecord
     before_create :assign_position
 
     validates :title,length: { minimum: 1, maximum: 15 },presence: true
+    validates :title, uniqueness: { scope: :user_id, message: "同じタイトルの習慣がすでに有効です" }, if: :is_active?
     validates :partner,presence: { message: "パートナーが未選択だよ"}
     validate  :active_limit_per_user, if: :is_active?
 
@@ -18,14 +19,15 @@ class Habit < ApplicationRecord
 
         active_count = user.habits.where(is_active: true).where.not(id: id).count
         # where.not(id: id)は、そのHabitのidがDBにあるなら主キーを、ないならnilが入る。登録しようとしているHabitの主キー以外のデータが3件以上かどうか調べるため！
-        if active_count >= 3
-            errors.add(:base, "一度に登録できる習慣は3つまで")
+            if active_count >= 3
+                errors.add(:base, "一度に登録できる習慣は3つまで")
+            end
         end
 
         def assign_position
-            # すでに active な習慣がいくつあるかを数えて、その次の番号を付与...positionに値を入れてviewで管理できるようにしたい
+            # すでにactiveな習慣がいくつあるかを数えて、その次の番号を付与...positionに値を入れてviewで管理できるようにしたい
             current_count = user.habits.where(is_active: true).count
             self.position = current_count + 1
         end
-    end
+
 end

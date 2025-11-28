@@ -1,0 +1,3 @@
+<%= turbo_stream.replace "habit-slot-#{@habit.position}",
+    partial: "habit_logs/create",
+    locals: { habit: @habit } %>

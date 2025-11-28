@@ -12,7 +12,9 @@ Rails.application.routes.draw do
   get "home/top"
 
   resources :users, only: %i[show edit update]
-  resources :habits, only: %i[index new create edit update destroy]
+  resources :habits, only: %i[index new create edit update destroy] do
+    resources :habit_logs, only: :create
+  end
 
 
   get "up" => "rails/health#show", as: :rails_health_check #ヘルスチェック

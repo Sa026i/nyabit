@@ -13,17 +13,27 @@ class HabitsController < ApplicationController
     end
 
     def create
-        existing = current_user.habits.find_by(title: habit_params[:title]) # ユーザーの中で同じタイトルのhabitがあるか探す
-        if existing #同じタイトルすでにあるパターン...indexに復活させる！
-            if existing.update(is_active: true, partner_id: habit_params[:partner_id])
-                @habit = existing
-                respond_create_success
-            else
-                @habit = existing
-                respond_create_failure
+        title = habit_params[:title]
+
+        # すでに有効な同名習慣がある場合は弾く
+        active_existing = current_user.habits.find_by(title: title, is_active: true)
+        if active_existing
+            @habit = active_existing
+            @habit.errors.add(:title, "同じ習慣を記録中だよ")
+            return respond_create_failure
+        end
+
+        # 無効な同名習慣がある場合は復活させる
+        existing = current_user.habits.find_by(title: title, is_active: false)
+        if existing
+            Habit.transaction do
+                next_pos = current_user.habits.where(is_active: true).count + 1
+                existing.update!(is_active: true, partner_id: habit_params[:partner_id], position: next_pos)
             end
+            @habit = existing
+            respond_create_success
         else
-        @habit = current_user.habits.new(habit_params) #同じタイトルないパターン...ターボ動かして作る
+            @habit = current_user.habits.new(habit_params)
             if @habit.save
                 respond_create_success
             else
@@ -62,11 +72,16 @@ class HabitsController < ApplicationController
         end
     end
 
-    def destroy
-        @habit.is_active = false
-        @habit.save
-        redirect_to habits_path, notice: "習慣を削除しました"
+def destroy
+    Habit.transaction do
+        removed_pos = @habit.position
+        #後続を詰める
+        current_user.habits.where("position > ?", removed_pos).update_all("position = position - 1")
+        #無効化しつつpositionを外す
+        @habit.update!(is_active: false, position: nil)
     end
+    redirect_to habits_path, notice: "削除しました"
+end
 
     private
 
