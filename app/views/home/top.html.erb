@@ -6,17 +6,29 @@
     <% @habits.each do |h| %>
     <% slot_class =
         case h.position
-            when 1 then "left-[10%] bottom-[5%]"
-            when 2 then "left-[40%] bottom-[27%]"
-            when 3 then "left-[60%] bottom-[5%]"
+            when 1 then "left-[10%] bottom-[3%]"
+            when 2 then "left-[40%] bottom-[25%]"
+            when 3 then "left-[60%] bottom-[1%]"
         end %>
     <div id="habit-slot-<%= h.position %>"
         class="absolute <%= slot_class %> text-center">
-        <%= h.title %>
-        <%= image_tag(asset_exist?("#{h.partner.code}_1.webp") ?
-            "#{h.partner.code}_1.webp" :
-            "no_image.webp",
-            class: "w-[200px] h-[200px]") %>
+        <p><%= h.title %></p>
+        <% done = @completed_habit_ids.include?(h.id) %>
+        <% if done %> <!-- 習慣未完了ならボタン化、完了してたら😄にするやつ -->
+            <%= image_tag(asset_exist?("#{h.partner.code}_2.webp") ?
+                "#{h.partner.code}_2.webp" :
+                "no_image.webp",
+                class: "w-[200px] h-[200px]") %>
+        <% else%>
+            <%= button_to habit_habit_logs_path(h),
+                form: { data: { turbo_stream: true } },
+                class: "p-0 bg-transparent border-none" do %>
+            <%= image_tag(asset_exist?("#{h.partner.code}_1.webp") ?
+                "#{h.partner.code}_1.webp" :
+                "no_image.webp",
+                class: "w-[200px] h-[200px]") %>
+            <% end %>
+        <% end %>
     </div>
     <% end %>
 </div>

@@ -1,0 +1,16 @@
+<%= turbo_frame_tag "habit-slot-#{habit.position}" do %>
+    <% slot_class =
+        case habit.position
+            when 1 then "left-[10%] bottom-[3%]"
+            when 2 then "left-[40%] bottom-[25%]"
+            when 3 then "left-[60%] bottom-[1%]"
+        end %>
+    <div id="habit-slot-<%= habit.position %>"
+        class="absolute <%= slot_class %> text-center">
+        <p><%= habit.title %></p>
+    <%= image_tag(asset_exist?("#{habit.partner.code}_2.webp") ?
+        "#{habit.partner.code}_2.webp" :
+        "no_image.webp",
+        class: "w-[200px] h-[200px]") %>
+    </div>
+<% end %>
