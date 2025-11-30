@@ -1,0 +1,53 @@
+
+<section class="min-h-screen bg-gradient-to-b from-base-200/80 via-base-100 to-base-200 py-10">
+    <div class="max-w-5xl mx-auto px-4">
+        <div class="flex items-center gap-3 mb-6">
+            <div class="avatar placeholder">
+                <div class="bg-primary text-primary-content w-12 rounded-full shadow-md">
+                    <span class="text-lg font-bold"><%= current_user&.name.to_s.first %></span>
+                </div>
+            </div>
+        <div>
+            <p class="text-sm text-neutral/60">毎日の足跡をいっしょに。</p>
+            <h1 class="text-2xl font-black text-primary"><%= current_user.name %>の記録</h1>
+        </div>
+    </div>
+
+    <div class="card bg-base-100 shadow-2xl border border-base-200/80">
+        <div class="card-body gap-6">
+            <div class="flex flex-wrap items-center justify-between gap-3">
+                <div class="badge badge-secondary badge-lg gap-2 shadow-sm">
+                    <i class="fa-solid fa-paw"></i>
+                        習慣カレンダー
+                </div>
+                    <p class="text-sm text-neutral/60">今日もこつこつ、かわいく続けましょう。</p>
+            </div>
+
+            <%= month_calendar(events: @habit_logs, attribute: :logged_on) do |date, logs| %>
+                <div class="h-28 rounded-2xl border border-base-200 bg-base-100/80 p-2 shadow-inner hover:shadow-lg transition-all duration-200">
+                    <div class="flex items-start justify-between text-[11px] font-semibold text-neutral/70">
+                        <span><%= date.day %>日</span>
+                            <% if date == Date.current %>
+                        <span class="badge badge-primary badge-xs">Today</span>
+                            <% end %>
+                    </div>
+
+                <div class="mt-2 flex flex-wrap gap-2">
+                    <% if logs.present? %>
+                        <% logs.each do |log| %>
+                    <%# ここで肉球スタンプとか、パートナーの色とか出す %>
+                            <span class="badge badge-outline badge-lg gap-2 bg-base-200/60 border-base-300 text-base-content shadow-sm">
+                            <i class="fa-solid fa-cat text-lg text-accent"></i>
+                                <%= log.habit_title %>
+                            </span>
+                        <% end %>
+                    <% else %>
+                    <span class="text-[11px] text-neutral/50"></span>
+                    <% end %>
+                    </div>
+                </div>
+                <% end %>
+            </div>
+        </div>
+    </div>
+</section>

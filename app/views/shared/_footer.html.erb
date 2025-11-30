@@ -10,8 +10,7 @@
     <span class="dock-label text-sm">習慣</span>
 <% end %>
 
-<!-- #link_to calendar_path -->
-<%= link_to "", class: "dock-item flex flex-col items-center" do %>
+<%= link_to calendars_path, class: "dock-item flex flex-col items-center #{current_page?(calendars_path) ? 'text-blue-300' : 'text-base-content' }" do %>
     <i class="fa-solid fa-calendar text-xl"></i>
     <span class="dock-label text-xs">カレンダー</span>
 <% end %>
