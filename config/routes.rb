@@ -16,6 +16,7 @@ Rails.application.routes.draw do
     resources :habit_logs, only: :create
   end
 
+  resources :calendars, only: :index
 
   get "up" => "rails/health#show", as: :rails_health_check #ヘルスチェック
 

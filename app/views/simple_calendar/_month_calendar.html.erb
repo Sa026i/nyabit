@@ -1,0 +1,46 @@
+<div class="simple-calendar w-full space-y-4">
+  <div class="flex flex-wrap items-center justify-between gap-3 rounded-2xl border border-base-200 bg-base-100/90 px-4 py-3 shadow-md">
+    <div class="flex items-center gap-3">
+      <div class="rounded-2xl bg-primary/10 p-3 text-primary shadow-inner">
+        <i class="fa-solid fa-calendar-days text-xl"></i>
+      </div>
+      <div>
+        <p class="text-xs text-neutral/60">今月の予定</p>
+        <time datetime="<%= start_date.strftime('%Y-%m') %>" class="text-xl font-black text-primary">
+          <%= t('date.month_names')[start_date.month] %> <%= start_date.year %>
+        </time>
+      </div>
+    </div>
+
+    <nav class="join shadow-sm">
+      <%= link_to t('simple_calendar.previous', default: 'Previous'), calendar.url_for_previous_view, class: "btn btn-sm join-item btn-outline" %>
+      <%= link_to t('simple_calendar.today', default: 'Today'), calendar.url_for_today_view, class: "btn btn-sm join-item btn-primary" %>
+      <%= link_to t('simple_calendar.next', default: 'Next'), calendar.url_for_next_view, class: "btn btn-sm join-item btn-outline" %>
+    </nav>
+  </div>
+
+  <div class="overflow-hidden rounded-2xl border border-base-200 bg-base-100 shadow-xl">
+    <table class="table table-sm text-sm">
+      <thead class="bg-base-200/80 text-neutral/70 uppercase tracking-wide">
+        <tr>
+          <% date_range.slice(0, 7).each do |day| %>
+            <th class="text-center text-[11px] font-semibold"><%= t('date.abbr_day_names')[day.wday] %></th>
+          <% end %>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% date_range.each_slice(7) do |week| %>
+          <tr class="align-top">
+            <% week.each do |day| %>
+              <% td_classes = ["align-top", "p-1", "md:p-2", "border-base-200", "bg-base-100/70", calendar.td_classes_for(day)].compact.join(" ") %>
+              <%= content_tag :td, class: td_classes do %>
+                <% instance_exec(day, calendar.sorted_events_for(day), &passed_block) %>
+              <% end %>
+            <% end %>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
