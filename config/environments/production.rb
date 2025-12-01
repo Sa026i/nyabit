@@ -102,4 +102,6 @@ Rails.application.configure do
   # ]
   # Skip DNS rebinding protection for the default health check endpoint.
   # config.host_authorization = { exclude: ->(request) { request.path == "/up" } }
+
+  config.exceptions_app = self.routes # 例外が発生した時に呼び出されるアプリケーションを設定するためのもの エラー画面カスタマイズ用に独自のルーティングを有効にした
 end

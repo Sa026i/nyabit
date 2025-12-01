@@ -19,21 +19,22 @@
     <script type="module" src="https://unpkg.com/cally"></script>
   </head>
 
-  <header>
-  <%= render 'shared/header' %>
+  <body class="min-h-screen bg-base-100 text-base-content">
+    <div class="flex min-h-screen flex-col">
+      <header class="sticky top-0 z-30 bg-base-100/90 backdrop-blur">
+        <%= render 'shared/header' %>
+      </header>
 
-  </header>
+      <main class="flex-1 pb-15">
+        <div id="flash">
+          <%= render "layouts/flash" %>
+        </div>
+        <%= yield %>
+      </main>
 
-  <body>
-  <div id="flash">
-    <%= render "layouts/flash" %>
-  </div>
-    <%= yield %>
+      <footer class="pt-2">
+        <%= render 'shared/footer' %>
+      </footer>
+    </div>
   </body>
-
-  <footer>
-  <%= render 'shared/footer' %>
-
-  </footer>
 </html>
-
