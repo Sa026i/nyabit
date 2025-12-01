@@ -1,4 +1,5 @@
 class HomeController < ApplicationController
+  before_action :authenticate_user!
   def top
     @habits = current_user.habits.where(is_active: true).includes(:partner)
 

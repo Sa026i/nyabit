@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html data-theme="caramellatte">
+<head>
+    <title><%= content_for?(:title) ? yield(:title) : "ERROR" %></title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+        <%= csrf_meta_tags %>
+        <%= csp_meta_tag %>
+        <%= stylesheet_link_tag "application", media: "all", "data-turbo-track": "reload" %>
+        <%= stylesheet_link_tag "error", media: "all" %>
+</head>
+<body class="min-h-screen bg-base-100 text-base-content flex flex-col items-center justify-center px-4 py-10">
+    <!-- エラーメッセージ -->
+    <div class="w-full max-w-xl">
+        <%= yield %>
+    </div>
+
+    <p class="mt-6 text-sm">
+        <%= link_to "トップページに戻る", root_path, class: "link link-primary" %>
+    </p>
+</body>
+</html>
