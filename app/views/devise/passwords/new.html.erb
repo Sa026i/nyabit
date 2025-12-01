@@ -1,3 +1,7 @@
+<div class="relative min-h-screen overflow-hidden">
+    <div class="absolute inset-0 bg-cover bg-center opacity-60"
+        style="background-image: url(<%= asset_path('pc_back_lunch.webp') %>);"></div>
+
 <h2>Forgot your password?</h2>
 
 <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>

@@ -3,6 +3,7 @@
 class Users::SessionsController < Devise::SessionsController
 #ログイン用コントローラー
   # before_action :configure_sign_in_params, only: [:create]
+  after_action :suppress_sign_in_notice, only: :create
 
   # GET /resource/sign_in
   # def new
@@ -34,5 +35,12 @@ class Users::SessionsController < Devise::SessionsController
 
   def after_sign_out_path_for(resource_or_scope)
     root_path
+  end
+
+  private
+
+  # ログイン成功時のフラッシュだけ消す
+  def suppress_sign_in_notice
+    flash.delete(:notice)
   end
 end
