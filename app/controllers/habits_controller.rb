@@ -1,8 +1,7 @@
 class HabitsController < ApplicationController
-    before_action :authenticate_user! #ログイン済みユーザーでなければログイン画面にはじく
-    before_action :set_partners  #パートナーの全id取得。習慣登録画面用
-    before_action :set_habit, only: %i[edit update destroy] #パラメーターから選択された習慣を取得
-
+    before_action :authenticate_user!
+    before_action :set_partners
+    before_action :set_habit, only: %i[edit update destroy]
     def index
         @habit = Habit.new
         @habits = current_user.habits.where(is_active: true).includes(:partner)

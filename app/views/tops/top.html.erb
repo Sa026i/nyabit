@@ -1,3 +1,18 @@
-<h1>Hello Nyabit</h1>
+<div class="relative min-h-screen overflow-hidden">
+    <div class="absolute inset-0 bg-cover bg-center opacity-40" style="background-image: url(<%= asset_path('pc_back_lunch.webp') %>);"></div>
 
-<button class="btn btn-primary">Hello daisyUI!</button>
+    <div class="relative z-10 flex min-h-screen items-center justify-center px-4 py-10">
+        <div class="flex flex-col items-center gap-6 text-center">
+            <div class="relative ">
+                <div class="relative ">
+                    <%= image_tag("nyabit_logo.webp", class: "w-[260px] md:w-[300px] mx-auto drop-shadow-lg") %>
+                </div>
+            </div>
+        </div>
+
+        <div class="flex flex-wrap justify-center gap-3 pt-2">
+            <%= link_to "新規登録", new_user_registration_path, class: "btn btn-primary btn-lg shadow-lg" %>
+            <%= link_to "ログイン", new_user_session_path, class: "btn btn-outline btn-lg" %>
+        </div>
+    </div>
+</div>

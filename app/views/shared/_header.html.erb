@@ -29,8 +29,11 @@
     </div>
     </div>
     <div class="navbar-center">
-    <div class="flex-1">
-        <%= link_to "Nyabit", root_path, class: "btn btn-ghost text-xl navbar-center" %>
+    <div class="flex-1 navbar-center">
+            <%= button_to root_path,
+                class: "btn btn-ghost w-[120px] h-[60px] " do %>
+                <%= image_tag("nyabit_logo.webp") %>
+            <% end %>
     </div>
     </div>
 
