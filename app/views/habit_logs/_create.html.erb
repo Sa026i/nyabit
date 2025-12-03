@@ -7,8 +7,10 @@
         end %>
     <div id="habit-slot-<%= habit.position %>"
         class="absolute <%= slot_class %> text-center">
-        <p><%= habit.title %></p>
-        <div data-controller="bubble" class="bubbly-button relative inline-block" data-action="click->bubble#animate">
+        <p class="inline-flex items-center gap-2 rounded-full bg-base-200/80 px-4 py-2 text-sm font-bold text-neutral/70 shadow-sm">
+            <%= habit.title %>
+        </p>
+        <div data-controller="bubble" class="bubbly-button relative " data-action="click->bubble#animate">
             <%= image_tag(asset_exist?("#{habit.partner.code}_2.webp") ?
             "#{habit.partner.code}_2.webp" :
             "no_image.webp",

@@ -1,21 +1,49 @@
-<div id="<%= dom_id(habit) %>">
-    <p><%= image_tag(asset_exist?("#{habit.partner.code}.webp") ?
-            "#{habit.partner.code}.webp" :
-            "no_image_icon.webp",
-            class: "w-[140px] h-[140px]") %><%= habit.title %></p>
-    <button class="btn btn-primary" onclick="my_modal_edit_<%= habit.id %>.showModal()">編集</button>
-    <dialog id="my_modal_edit_<%= habit.id %>" class="modal" data-controller="modal">
-    <div class="modal-box max-w-3xl w-full max-h-[80vh] overflow-x-hidden">
-        <form method="dialog">
-        <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
-        </form>
-    <fieldset class="fieldset bg-base-200 border-base-300 rounded-box w-xs border p-4">
-    <legend class="fieldset-legend">Page details</legend>
+<div id="<%= dom_id(habit) %>" class="group relative overflow-hidden rounded-2xl border border-base-200 bg-base-100/90 shadow-md p-4 md:p-4 transition-all duration-200 hover:shadow-xl max-w-2xl mx-auto">
+    <div class="flex flex-col md:flex-row items-center md:items-start gap-3 md:gap-4">
+        <div class="flex items-center justify-center rounded-xl bg-base-200/80 p-2.5 shadow-inner">
+            <%= image_tag(asset_exist?("#{habit.partner.code}.webp") ?
+                "#{habit.partner.code}.webp" :
+                "no_image_icon.webp",
+                class: "w-[100px] h-[100px] drop-shadow") %>
+        </div>
 
-    <%= render 'edit', habit: habit, partners: @partners %>
+        <div class="flex-1 space-y-2 text-center md:text-left">
+            <div class="flex items-center gap-2 text-[24px] text-neutral/60 justify-center md:justify-start">
+                <span class="badge badge-outline">
+                    <i class="fa-solid fa-fire-flame-curved text-amber-400"></i>
+                    <%= "#{habit.habit_logs.count}日達成" %>
+                </span>
+            </div>
+            <div class="rounded-xl border border-base-200 bg-base-100/90 px-3 py-2.5 shadow-inner">
+                <p class="text-base md:text-lg font-semibold text-primary break-words">
+                    <%= habit.title %>
+                </p>
+            </div>
+        </div>
+
+        <div class="flex flex-col md:items-end items-center gap-2 shrink-0">
+            <button class="btn btn-secondary btn-xs md:btn-sm" onclick="my_modal_edit_<%= habit.id %>.showModal()">
+                編集
+            </button>
+            <%= link_to '削除',
+                habit_path(habit),
+                data: { turbo_method: :delete,
+                turbo_confirm: "削除します。よろしいですか？"},
+                class: "btn btn-outline btn-error btn-xs md:btn-sm" %>
+        </div>
     </div>
+
+<!-- モーダル -->
+    <dialog id="my_modal_edit_<%= habit.id %>" class="modal" data-controller="modal">
+        <div class="modal-box max-w-3xl w-full max-h-[80vh] overflow-x-hidden">
+            <form method="dialog">
+                <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+            </form>
+
+            <fieldset class="fieldset bg-base-200 border-base-300 rounded-box w-full border p-4">
+                <legend class="fieldset-legend"></legend>
+                    <%= render 'edit', habit: habit, partners: @partners %>
+            </fieldset>
+        </div>
     </dialog>
-    <div>
-    <%= link_to '削除', habit_path(habit), data: { turbo_method: :delete, turbo_confirm: "投稿を削除します。よろしいですか？"}, class: "btn btn-primary" %>
-    </div>
 </div>
