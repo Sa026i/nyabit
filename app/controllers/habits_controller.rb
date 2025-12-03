@@ -7,9 +7,6 @@ class HabitsController < ApplicationController
         @habits = current_user.habits.where(is_active: true).includes(:partner)
     end
 
-    def new
-        @habit = Habit.new #これいるんかわからん...🥺
-    end
 
     def create
         title = habit_params[:title]

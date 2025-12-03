@@ -3,39 +3,39 @@
         <%= render "habits/modal_flash", habit: habit, flash: flash %>
     </div>
 
-<%= form_with model: habit, data: { turbo_frame: "_top", action: "turbo:submit-end->modal#closeOnSuccess" } do |f| %>
-  <div>
-    <h3 class="text-lg font-bold">
-      <%= f.label :title, "習慣を入力してね" %>
-    </h3>
-    <%= f.text_field :title, class: "input input-bordered w-full" %>
-  </div>
+  <%= form_with model: habit, data: { turbo_frame: "_top", action: "turbo:submit-end->modal#closeOnSuccess" } do |f| %>
+    <div>
+      <h3 class="text-lg font-bold">
+        <%= f.label :title, "習慣を入力してね" %>
+      </h3>
+      <%= f.text_field :title, class: "input input-bordered w-full" %>
+    </div>
 
-  <div>
-    <h3 class="text-lg font-bold">パートナーを選んでね</h3>
-    <div class="pb-2">
-      <div class="flex flex-nowrap gap-4  w-145 max-w-full overflow-x-auto">
-        <% partners.each do |partner| %>
-          <label class="cursor-pointer block shrink-0">
-            <%= f.radio_button :partner_id, partner.id, class: "hidden peer" %>
-            <div class="p-4 border border-base-300 rounded-lg text-center bg-base-200 peer-checked:border-primary peer-checked:ring-2 peer-checked:ring-primary/40">
-              <div class="w-32 h-32 mx-auto flex items-center justify-center">
-                <p><%= image_tag(asset_exist?("#{partner.code}.webp") ?
-                    "#{partner.code}.webp" :
-                    "no_image_icon.webp",
-                    class: "max-w-full max-h-full object-contain object-center") %></p>
-              </div>
-              <p class="mt-2 text-sm font-semibold"><%= partner.name %></p>
-            </div>
-          </label>
-        <% end %>
+    <div>
+      <h3 class="text-lg font-bold">パートナーを選んでね</h3>
+      <div class="pb-2">
+        <div class="flex flex-nowrap gap-4  w-145 max-w-full overflow-x-auto">
+          <% partners.each do |partner| %>
+            <label class="cursor-pointer block shrink-0">
+              <%= f.radio_button :partner_id, partner.id, class: "hidden peer" %>
+                <div class="p-4 border border-base-300 rounded-lg text-center bg-base-200 peer-checked:border-primary peer-checked:ring-2 peer-checked:ring-primary/40">
+                  <div class="w-32 h-32 mx-auto flex items-center justify-center">
+                    <p><%= image_tag(asset_exist?("#{partner.code}.webp") ?
+                        "#{partner.code}.webp" :
+                        "no_image_icon.webp",
+                        class: "max-w-full max-h-full object-contain object-center") %></p>
+                  </div>
+                  <p class="mt-2 text-sm font-semibold"><%= partner.name %></p>
+                </div>
+            </label>
+          <% end %>
+        </div>
       </div>
     </div>
-  </div>
 
-  <div>
-    <%= f.submit "登録", class: "btn btn-neutral w-full" %>
-  </div>
-<% end %>
+    <div>
+      <%= f.submit "登録", class: "btn btn-neutral w-full" %>
+    </div>
+  <% end %>
 
 </div>

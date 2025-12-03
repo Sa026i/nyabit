@@ -1,60 +1,51 @@
 
-<section class="min-h-screen bg-gradient-to-b from-base-200/80 via-base-100 to-base-200 py-10">
-    <div class="max-w-5xl mx-auto px-4">
-        <div class="flex items-center gap-3 mb-6">
-            <div class="avatar placeholder">
-                <div class="bg-primary text-primary-content w-12 rounded-full shadow-md">
-                    <span class="text-lg font-bold"><%= current_user&.name.to_s.first %></span>
-                </div>
-            </div>
-            <div>
-                <p class="text-sm text-neutral/60">記録をいっしょに。</p>
-                <h1 class="text-2xl font-black text-primary"><%= current_user.name %>の記録</h1>
-            </div>
-        </div>
+<section class="relative min-h-screen overflow-hidden">
+  <div class="absolute inset-0 bg-cover bg-center opacity-60" style="background-image: url(<%= asset_path('pc_back_lunch.webp') %>);"></div>
+  <div class="absolute inset-0 bg-gradient-to-b from-base-100/80 via-base-100/60 to-base-100/90"></div>
 
-        <div class="card bg-base-100 shadow-2xl border border-base-200/80">
-            <div class="card-body gap-6">
-                <div class="flex flex-wrap items-center justify-between gap-3">
-                    <div class="badge badge-secondary badge-lg gap-2 shadow-sm">
-                        <i class="fa-solid fa-paw"></i>
-                            習慣カレンダー
-                    </div>
-                        <p class="text-sm text-neutral/60">今日もこつこつ、かわいく続けましょう。</p>
-                </div>
+  <div class="relative z-10 max-w-5xl mx-auto px-4 py-12 space-y-6">
+    <div class="flex flex-col items-center gap-3 text-center">
+      <div class="inline-flex items-center gap-2 rounded-full bg-base-200/80 px-4 py-2 text-2xl text-neutral/70 shadow-sm">
+        <i class="fa-solid fa-paw text-amber-400"></i>
+        <span><%= current_user.name %>の記録</span>
+      </div>
 
-                <%= month_calendar(events: @habit_logs, attribute: :logged_on) do |date, logs| %>
-                    <div class="relative h-28 rounded-2xl border border-base-200 bg-base-100/80 p-2 shadow-inner hover:shadow-lg transition-all duration-200 overflow-hidden">
-                        <div class="absolute left-2 top-2 flex items-center gap-2 text-[11px] font-semibold text-neutral/70">
-                            <span><%= date.day %>日</span>
-                            <% if date == Date.current %>
-                                <span class="badge badge-primary badge-xs">Today</span>
-                            <% end %>
-                        </div>
-
-                        <div class="flex h-full items-center justify-center">
-                            <% if logs.present? %>
-                                <% count = logs.size %>
-                                <% stamp_color =
-                                    case count
-                                    when 1 then "text-pink-300"
-                                    when 2 then "text-green-300"
-                                    when 3 then "text-sky-300"
-                                    else "text-accent"
-                                end %>
-                                <div class="flex flex-col items-center gap-1">
-                                    <span class="inline-flex h-12 w-12 items-center justify-center rounded-full bg-base-200/90 shadow-md">
-                                        <i class="fa-solid fa-heart text-3xl <%= stamp_color %>"></i>
-                                    </span>
-                                    <span class="text-[11px] text-neutral/60 font-semibold">x<%= count %></span>
-                                </div>
-                            <% else %>
-                                <span class="text-[11px] text-neutral/50"></span>
-                            <% end %>
-                        </div>
-                    </div>
-                <% end %>
-            </div>
-        </div>
     </div>
+
+    <div class="card bg-base-100/95 shadow-2xl border border-base-200/80 backdrop-blur">
+      <div class="card-body gap-6">
+        <%= month_calendar(events: @habit_logs, attribute: :logged_on) do |date, logs| %>
+          <div class="relative h-24 md:h-28 rounded-2xl border border-base-200 bg-base-100/80 p-2 shadow-inner hover:shadow-lg transition-all duration-200 overflow-hidden">
+            <div class="absolute left-2 top-2 flex items-center gap-2 text-[11px] font-semibold text-neutral/70">
+              <span><%= date.day %>日</span>
+              <% if date == Date.current %>
+                <span class="badge badge-primary badge-xs">Today</span>
+              <% end %>
+            </div>
+
+            <div class="flex h-full items-center justify-center">
+              <% if logs.present? %>
+                <% count = logs.size %>
+                <% stamp_color =
+                  case count
+                  when 1 then "text-pink-300"
+                  when 2 then "text-green-300"
+                  when 3 then "text-sky-300"
+                  else "text-accent"
+                  end %>
+                <div class="flex flex-col items-center gap-1">
+                  <span class="inline-flex h-10 w-10 md:h-12 md:w-12 items-center justify-center rounded-full bg-base-200/90 shadow-md">
+                    <i class="fa-solid fa-heart text-2xl md:text-3xl <%= stamp_color %>"></i>
+                  </span>
+                  <span class="text-[11px] text-neutral/60 font-semibold">x<%= count %></span>
+                </div>
+              <% else %>
+                <span class="text-[11px] text-neutral/50">－</span>
+              <% end %>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
 </section>
