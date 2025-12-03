@@ -4,6 +4,9 @@
 
 import { application } from "./application"
 
+import BubbleController from "./bubble_controller"
+application.register("bubble", BubbleController)
+
 import HelloController from "./hello_controller"
 application.register("hello", HelloController)
 

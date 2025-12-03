@@ -5,7 +5,7 @@
             class: "w-[140px] h-[140px]") %><%= habit.title %></p>
     <button class="btn btn-primary" onclick="my_modal_edit_<%= habit.id %>.showModal()">編集</button>
     <dialog id="my_modal_edit_<%= habit.id %>" class="modal" data-controller="modal">
-    <div class="modal-box">
+    <div class="modal-box max-w-3xl w-full max-h-[80vh] overflow-x-hidden">
         <form method="dialog">
         <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
         </form>
@@ -15,5 +15,7 @@
     <%= render 'edit', habit: habit, partners: @partners %>
     </div>
     </dialog>
+    <div>
     <%= link_to '削除', habit_path(habit), data: { turbo_method: :delete, turbo_confirm: "投稿を削除します。よろしいですか？"}, class: "btn btn-primary" %>
+    </div>
 </div>

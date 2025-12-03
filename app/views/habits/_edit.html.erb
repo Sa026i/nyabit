@@ -1,4 +1,4 @@
-<h1>編集ページ</h1>
+<h1>編集</h1>
 
 <div id="habit_form">
     <div id="habit_modal_flash">
@@ -12,16 +12,25 @@
     <h3>
     <%= f.text_field :title, class: "input input-bordered w-full" %>
     </div>
-    <div class="flex gap-4">
-    <% partners.each do |partner| %>
-    <label class="cursor-pointer">
+    <h3 class="text-lg font-bold">パートナーを選んでね</h3>
+    <div class="pb-2">
+        <div class="flex flex-nowrap gap-4  w-145 max-w-full overflow-x-auto">
+            <% partners.each do |partner| %>
+                <label class="cursor-pointer block shrink-0">
         <%= f.radio_button :partner_id, partner.id, class: "hidden peer" %>
-        <div class="p-4 border rounded peer-checked:border-blue-500">
-        <p>ID: <%= partner.id %></p>
-        <p><%= partner.name %></p>
+        <div class="p-4 border border-base-300 rounded-lg text-center bg-base-200 peer-checked:border-primary peer-checked:ring-2 peer-checked:ring-primary/40">
+        <div class="w-32 h-32 mx-auto flex items-center justify-center">
+        <p><%= image_tag(asset_exist?("#{partner.code}.webp") ?
+                    "#{partner.code}.webp" :
+                    "no_image_icon.webp",
+                    class: "max-w-full max-h-full object-contain object-center") %></p>
+        </div>
+            <p class="mt-2 text-sm font-semibold"><%= partner.name %></p>
+            </div>
+            </label>
+        <% end %>
     </div>
-    </label>
-    <% end %>
+    </div>
     </div>
     <div>
         <%= f.submit "保存", class: "btn btn-neutral mt-4" %>
